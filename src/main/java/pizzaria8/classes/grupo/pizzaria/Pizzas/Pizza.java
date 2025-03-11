@@ -1,11 +1,11 @@
-package pizzaria8.classes.grupo.pizzaria;
+package pizzaria8.classes.grupo.pizzaria.Pizzas;
 
 import java.util.ArrayList;
 
 public class Pizza {
 
     private String sabor;
-    private ArrayList<String> igredientes = new ArrayList<>();
+    private ArrayList<String> ingredientes = new ArrayList<>();
     private double Preco;
 
 
@@ -23,11 +23,11 @@ public class Pizza {
     }
 
     public ArrayList<String> getIgredientes() {
-        return igredientes;
+        return ingredientes;
     }
 
     public void setIgredientes(ArrayList<String> igredientes) {
-        this.igredientes = igredientes;
+        this.ingredientes = igredientes;
     }
 
     public double getPreco() {
