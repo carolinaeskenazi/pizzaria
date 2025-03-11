@@ -8,6 +8,12 @@ public class Pizza {
     private ArrayList<String> igredientes = new ArrayList<>();
     private double Preco;
 
+
+    public Pizza(String sabor, double preco) {
+        this.sabor = sabor;
+        this.Preco = preco;
+    }
+
     public String getSabor() {
         return sabor;
     }
