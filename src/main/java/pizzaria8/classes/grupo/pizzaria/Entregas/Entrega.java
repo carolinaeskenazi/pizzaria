@@ -1,4 +1,4 @@
-package pizzaria8.classes.grupo.pizzaria;
+package pizzaria8.classes.grupo.pizzaria.Entregas;
 
 import pizzaria8.classes.grupo.pizzaria.Pedidos.Pedido;
 

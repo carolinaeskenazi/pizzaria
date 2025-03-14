@@ -13,19 +13,19 @@ public class CardapioController {
     @Autowired
     private CardapioService cardapioService;
 
-    @GetMapping("/cardapio/pizzas")
+    @GetMapping("/cardapio/pizza")
     public HashMap<String, Pizza> getPizzas() {
 
         return cardapioService.getPizzas();
     }
 
-    @GetMapping("/cardapio/bebidas")
+    @GetMapping("/cardapio/bebida")
     public HashMap<String, Bebida> getBebidas() {
 
         return cardapioService.getBebidas();
     }
 
-    @GetMapping("/cardapio/acompanhamentos")
+    @GetMapping("/cardapio/acompanhamento")
     public HashMap<String, Acompanhamento> getAcompanhamentos() {
 
         return cardapioService.getAcompanhamentos();
