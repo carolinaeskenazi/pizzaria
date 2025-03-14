@@ -2,6 +2,8 @@ package pizzaria8.classes.grupo.pizzaria;
 
 import java.util.ArrayList;
 import java.util.List;
+import pizzaria8.classes.grupo.pizzaria.Pizzas.Pizza;
+
 
 public class Cardapio {
     private List<Pizza> pizzas;
