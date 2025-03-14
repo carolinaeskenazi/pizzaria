@@ -30,7 +30,7 @@ public class PizzaController {
         }
 
         pizzaService.salvarPizza(pizza);
-        return "Cliente salvo com sucesso";
+        return "Pizza salva com sucesso";
     }
 
     @GetMapping("/pizza/{sabor}")
