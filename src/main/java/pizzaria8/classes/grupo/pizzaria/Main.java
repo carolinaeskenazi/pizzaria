@@ -1,22 +1,24 @@
 package pizzaria8.classes.grupo.pizzaria;
 
 
+import pizzaria8.classes.grupo.pizzaria.Menu.Cardapio;
+
 public class Main {
     public static void main(String[] args) {
 
         Cardapio cardapio = new Cardapio();
 
-        cardapio.adicionarPizza(new Pizza("Calabresa", 35.00));
-        cardapio.adicionarPizza(new Pizza("Marguerita", 38.00));
-
-        cardapio.adicionarBebida(new Bebida("Coca-Cola 1L", 8.00));
-        cardapio.adicionarBebida(new Bebida("Suco Natural", 10.00));
-
-        cardapio.adicionarAcompanhamento(new Acompanhamento("Batata Frita", 15.00));
-
-        cardapio.listarPizzas();
-        cardapio.listarBebidas();
-        cardapio.listarAcompanhamentos();
+//        cardapio.adicionarPizza(new Pizza("Calabresa", 35.00));
+//        cardapio.adicionarPizza(new Pizza("Marguerita", 38.00));
+//
+//        cardapio.adicionarBebida(new Bebida("Coca-Cola 1L", 8.00));
+//        cardapio.adicionarBebida(new Bebida("Suco Natural", 10.00));
+//
+//        cardapio.adicionarAcompanhamento(new Acompanhamento("Batata Frita", 15.00));
+//
+//        cardapio.listarPizzas();
+//        cardapio.listarBebidas();
+//        cardapio.listarAcompanhamentos();
 
 //-----------------------------------------------------------------------------------------------------------------
         Cozinha cozinha = new Cozinha();
