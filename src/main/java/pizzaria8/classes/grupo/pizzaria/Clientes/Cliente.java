@@ -1,4 +1,6 @@
-package pizzaria8.classes.grupo.pizzaria;
+package pizzaria8.classes.grupo.pizzaria.Clientes;
+
+import pizzaria8.classes.grupo.pizzaria.Pedidos.Pedido;
 
 import java.util.ArrayList;
 

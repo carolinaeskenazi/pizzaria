@@ -3,6 +3,7 @@ package pizzaria8.classes.grupo.pizzaria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import pizzaria8.classes.grupo.pizzaria.Clientes.Cliente;
 
 import java.util.HashMap;
 

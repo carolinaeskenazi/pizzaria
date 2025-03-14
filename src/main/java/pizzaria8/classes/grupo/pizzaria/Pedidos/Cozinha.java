@@ -1,4 +1,4 @@
-package pizzaria8.classes.grupo.pizzaria;
+package pizzaria8.classes.grupo.pizzaria.Pedidos;
 
 import java.util.ArrayList;
 import java.util.List;
