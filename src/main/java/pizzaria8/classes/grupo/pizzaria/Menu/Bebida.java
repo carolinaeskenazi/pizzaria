@@ -1,10 +1,10 @@
-package pizzaria8.classes.grupo.pizzaria;
+package pizzaria8.classes.grupo.pizzaria.Menu;
 
-public class Acompanhamento {
+public class Bebida {
     private String nome;
     private double preco;
 
-    public Acompanhamento(String nome, double preco) {
+    public Bebida(String nome, double preco) {
         this.nome = nome;
         this.preco = preco;
     }
@@ -16,4 +16,5 @@ public class Acompanhamento {
     public double getPreco() {
         return preco;
     }
+
 }
