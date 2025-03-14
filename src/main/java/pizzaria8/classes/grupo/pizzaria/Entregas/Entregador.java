@@ -1,4 +1,7 @@
-package pizzaria8.classes.grupo.pizzaria;
+package pizzaria8.classes.grupo.pizzaria.Entregas;
+
+import pizzaria8.classes.grupo.pizzaria.Entregas.Entrega;
+
 
 class Entregador {
     private String nome;

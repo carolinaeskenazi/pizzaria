@@ -12,7 +12,7 @@ public class PizzaController {
     @Autowired
     private PizzaService pizzaService;
 
-    @GetMapping("/pizzas")
+    @GetMapping("/pizza")
     public HashMap<String, Pizza> getPizzas() {
 
         return pizzaService.getPizzas();
