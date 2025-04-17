@@ -1,62 +1,57 @@
 package pizzaria8.classes.grupo.pizzaria.Menu;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pizzaria8.classes.grupo.pizzaria.Pizzas.Pizza;
+import pizzaria8.classes.grupo.pizzaria.Pizzas.PizzaRepository;
 
-import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class CardapioService {
 
-    private HashMap<String, Pizza> pizzas = new HashMap<>();
-    private HashMap<String, Bebida> bebidas = new HashMap<>();
-    private HashMap<String, Acompanhamento> acompanhamentos = new HashMap<>();
+    @Autowired
+    private PizzaRepository pizzaRepo;
 
+    @Autowired
+    private BebidaRepository bebidaRepo;
 
+    @Autowired
+    private AcompanhamentoRepository acompanhamentoRepo;
 
     public void salvarPizza(Pizza pizza) {
-
-        pizzas.put(pizza.getSabor(), pizza);
+        pizzaRepo.save(pizza);
     }
 
     public void salvarBebida(Bebida bebida) {
-
-        bebidas.put(bebida.getNome(), bebida);
+        bebidaRepo.save(bebida);
     }
 
     public void salvarAcompanhamento(Acompanhamento acompanhamento) {
-
-        acompanhamentos.put(acompanhamento.getNome(), acompanhamento);
+        acompanhamentoRepo.save(acompanhamento);
     }
 
-    public HashMap<String, Pizza> getPizzas() {
-
-        return pizzas;
+    public List<Pizza> getPizzas() {
+        return pizzaRepo.findAll();
     }
 
-    public HashMap<String, Bebida> getBebidas() {
-
-        return bebidas;
+    public List<Bebida> getBebidas() {
+        return bebidaRepo.findAll();
     }
 
-    public HashMap<String, Acompanhamento> getAcompanhamentos() {
-
-        return acompanhamentos;
+    public List<Acompanhamento> getAcompanhamentos() {
+        return acompanhamentoRepo.findAll();
     }
 
-    public Pizza removerPizza(String sabor) {
-
-        return pizzas.remove(sabor);
+    public void removerPizza(Long id) {
+        pizzaRepo.deleteById(id);
     }
 
-    public Bebida removerBebida(String nome) {
-
-        return bebidas.remove(nome);
+    public void removerBebida(Long id) {
+        bebidaRepo.deleteById(id);
     }
 
-    public Acompanhamento removerAcompanhamento(String nome) {
-
-        return acompanhamentos.remove(nome);
+    public void removerAcompanhamento(Long id) {
+        acompanhamentoRepo.deleteById(id);
     }
-
 }
