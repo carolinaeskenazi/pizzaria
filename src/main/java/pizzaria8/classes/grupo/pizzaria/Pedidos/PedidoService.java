@@ -1,48 +1,39 @@
 package pizzaria8.classes.grupo.pizzaria.Pedidos;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class PedidoService {
 
-    // HashMap para simular um "banco de dados" em memória
-    private HashMap<Integer, Pedido> pedidos = new HashMap<>();
+    @Autowired
+    private PedidoRepository pedidoRepository;
 
-    // Retorna todos os pedidos
-    public HashMap<Integer, Pedido> getPedidos() {
-        return pedidos;
+    public List<Pedido> getPedidos() {
+        return pedidoRepository.findAll();
     }
 
-    // Salva (ou atualiza) um pedido no HashMap
-    public void salvarPedido(Pedido pedido) {
-        pedidos.put(pedido.getId(), pedido);
+    public Pedido salvarPedido(Pedido pedido) {
+        return pedidoRepository.save(pedido);
     }
 
-    // Busca um pedido específico pelo ID
     public Pedido getPedido(int id) {
-        return pedidos.get(id);
+        return pedidoRepository.findById(id).orElse(null);
     }
 
-    // Remove um pedido do HashMap
-    public Pedido removerPedido(int id) {
-        return pedidos.remove(id);
+    public void removerPedido(int id) {
+        pedidoRepository.deleteById(id);
     }
 
-    // Edita um pedido existente
     public Pedido editarPedido(int id, Pedido pedido) {
-        Pedido pedidoEditar = getPedido(id);
-        if (pedidoEditar != null) {
-            // Se foi enviado um novo ID, atualiza
-            if (pedido.getId() != 0 && pedido.getId() != pedidoEditar.getId()) {
-                pedidoEditar.setId(pedido.getId());
-            }
-            // Se foi enviado um novo cliente, atualiza
-            if (pedido.getCliente() != null) {
-                pedidoEditar.setCliente(pedido.getCliente());
-            }
+        Pedido existente = getPedido(id);
+        if (existente != null) {
+            existente.setCliente(pedido.getCliente());
+            return pedidoRepository.save(existente);
         }
-        return pedidoEditar;
+        return null;
     }
 }

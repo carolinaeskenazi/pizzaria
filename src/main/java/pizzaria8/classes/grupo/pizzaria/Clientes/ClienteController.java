@@ -1,62 +1,32 @@
-package pizzaria8.classes.grupo.pizzaria;
+package pizzaria8.classes.grupo.pizzaria.Clientes;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
-import pizzaria8.classes.grupo.pizzaria.Clientes.Cliente;
-
-import java.util.HashMap;
 
 @RestController
+@RequestMapping("/clientes")
 public class ClienteController {
 
     @Autowired
-    private ClienteService clienteService;
+    private ClienteService service;
 
-    @GetMapping("/cliente")
-    public HashMap<String, Cliente> getClientes() {
-        return clienteService.getClientes();
+    @PostMapping
+    public Cliente salvar(@RequestBody Cliente cliente) {
+        return service.salvar(cliente);
     }
 
-    @PostMapping("/cliente")
-    @ResponseStatus(HttpStatus.CREATED)
-    public String salvarCliente(@RequestBody Cliente cliente) {
-        if (cliente.getNome() == null) {
-            return "Nome não pode ser nulo";
-        }
-
-        if (cliente.getCpf() == null) {
-            return "CPF não pode ser nulo";
-        }
-
-        clienteService.salvarCliente(cliente);
-        return "Cliente salvo com sucesso";
+    @GetMapping
+    public Page<Cliente> listar(@RequestParam(defaultValue = "0") int page,
+                                @RequestParam(defaultValue = "5") int size) {
+        return service.listarTodos(PageRequest.of(page, size));
     }
 
-    @GetMapping("/cliente/{cpf}")
-    public Cliente getCliente(@PathVariable String cpf) {
-        return clienteService.getCliente(cpf);
+    @GetMapping("/filtro")
+    public Page<Cliente> filtrar(@RequestParam String nome,
+                                 @RequestParam(defaultValue = "0") int page,
+                                 @RequestParam(defaultValue = "5") int size) {
+        return service.filtrarPorNome(nome, PageRequest.of(page, size));
     }
-
-
-    @DeleteMapping("/cliente/{cpf}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public String excluirCliente(@PathVariable String cpf) {
-        Cliente cliente = clienteService.removerCliente(cpf);
-        if (cliente != null) {
-            return "Cliente removido com sucesso";
-        }
-        return "Cliente não encontrado";
-    }
-
-    @PutMapping("/cliente/{cpf}")
-    public String editarCliente(@PathVariable String cpf, @RequestBody Cliente cliente) {
-
-        Cliente clienteRetorno = clienteService.editarCliente(cpf, cliente);
-        if (clienteRetorno != null) {
-            return "Cliente alterado com sucesso";
-        }
-        return "cliente não encontrado";
-    }
-
 }

@@ -1,62 +1,54 @@
 package pizzaria8.classes.grupo.pizzaria.Pizzas;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-
 @RestController
+@RequestMapping("/pizza")
 public class PizzaController {
 
     @Autowired
     private PizzaService pizzaService;
 
-    @GetMapping("/pizza")
-    public HashMap<String, Pizza> getPizzas() {
 
-        return pizzaService.getPizzas();
+    @GetMapping
+    public Page<Pizza> listarPizzas(Pageable pageable) {
+        return pizzaService.getPizzas(pageable);
     }
 
-    @PostMapping("/pizza")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public String salvarPizza(@RequestBody Pizza pizza) {
-        if (pizza.getSabor() == null) {
-            return "Nome não pode ser nulo";
-        }
-
-        if (pizza.getPreco() == 0) {
-            return "Preco não pode ser nulo";
-        }
-
-        pizzaService.salvarPizza(pizza);
-        return "Pizza salva com sucesso";
+    public Pizza criarPizza(@RequestBody Pizza pizza) {
+        return pizzaService.salvarPizza(pizza);
     }
 
-    @GetMapping("/pizza/{sabor}")
-    public Pizza getPizza(@PathVariable String sabor) {
-
-        return pizzaService.getPizza(sabor);
+    @GetMapping("/{id}")
+    public Pizza buscarPizza(@PathVariable Long id) {
+        return pizzaService.getPizza(id);
     }
 
-
-    @DeleteMapping("/pizza/{sabor}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public String excluirCliente(@PathVariable String sabor) {
-        Pizza pizza = pizzaService.removerPizza(sabor);
-        if (pizza != null) {
-            return "Pizza removida com sucesso";
+    public void excluirPizza(@PathVariable Long id) {
+        if (!pizzaService.excluirPizza(id)) {
+            throw new RuntimeException("Pizza não encontrada");
         }
-        return "Pizza não encontrado";
     }
 
-    @PutMapping("/pizza/{sabor}")
-    public String editarPizza(@PathVariable String sabor, @RequestBody Pizza pizza) {
-
-        Pizza pizzaRetorno = pizzaService.editarPizza(sabor, pizza);
-        if (pizzaRetorno != null) {
-            return "Pizza alterada com sucesso";
+    @PutMapping("/{id}")
+    public Pizza editarPizza(@PathVariable Long id, @RequestBody Pizza pizza) {
+        Pizza atualizada = pizzaService.editarPizza(id, pizza);
+        if (atualizada == null) {
+            throw new RuntimeException("Pizza não encontrada");
         }
-        return "Pizza não encontrado";
+        return atualizada;
+    }
+
+    @GetMapping("/sabor/{sabor}")
+    public Pizza buscarPorSabor(@PathVariable String sabor) {
+        return pizzaService.getPizzaPorSabor(sabor);
     }
 }

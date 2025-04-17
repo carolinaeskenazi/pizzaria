@@ -1,17 +1,31 @@
 package pizzaria8.classes.grupo.pizzaria.Pizzas;
 
-import java.util.ArrayList;
+import jakarta.persistence.*;
+import java.util.List;
 
+@Entity
 public class Pizza {
 
-    private String sabor;
-    private ArrayList<String> ingredientes = new ArrayList<>();
-    private double Preco;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
+    private String sabor;
+    private double preco;
+
+    @ElementCollection
+    private List<String> ingredientes;
+
+    public Pizza() {
+    }
 
     public Pizza(String sabor, double preco) {
         this.sabor = sabor;
-        this.Preco = preco;
+        this.preco = preco;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getSabor() {
@@ -22,23 +36,19 @@ public class Pizza {
         this.sabor = sabor;
     }
 
-    public ArrayList<String> getIgredientes() {
+    public List<String> getIngredientes() {
         return ingredientes;
     }
 
-    public void setIgredientes(ArrayList<String> igredientes) {
-        this.ingredientes = igredientes;
+    public void setIngredientes(List<String> ingredientes) {
+        this.ingredientes = ingredientes;
     }
 
     public double getPreco() {
-        return Preco;
+        return preco;
     }
 
     public void setPreco(double preco) {
-        Preco = preco;
-
+        this.preco = preco;
     }
-
-
-
 }

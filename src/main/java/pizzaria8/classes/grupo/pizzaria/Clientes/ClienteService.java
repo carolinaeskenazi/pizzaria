@@ -1,50 +1,25 @@
-package pizzaria8.classes.grupo.pizzaria;
+package pizzaria8.classes.grupo.pizzaria.Clientes;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import pizzaria8.classes.grupo.pizzaria.Clientes.Cliente;
-
-import java.util.HashMap;
 
 @Service
 public class ClienteService {
 
-    private HashMap<String, Cliente> clientes = new HashMap<>();
+    @Autowired
+    private ClienteRepository repo;
 
-    public HashMap<String, Cliente> getClientes() {
-        return clientes;
+    public Cliente salvar(Cliente c) {
+        return repo.save(c);
     }
 
-    public void salvarCliente(Cliente cliente) {
-        clientes.put(cliente.getCpf(), cliente);
+    public Page<Cliente> listarTodos(Pageable p) {
+        return repo.findAll(p);
     }
 
-    public Cliente getCliente(String cpf) {
-        return clientes.get(cpf);
+    public Page<Cliente> filtrarPorNome(String nome, Pageable p) {
+        return repo.findByNomeContainingIgnoreCase(nome, p);
     }
-
-    public Cliente removerCliente(String cpf) {
-        return clientes.remove(cpf);
-    }
-
-    public Cliente editarCliente(String cpf, Cliente cliente) {
-        Cliente clienteEditar = getCliente(cpf);
-
-        if (clienteEditar != null) {
-
-            if (cliente.getNome() != null) {
-                clienteEditar.setNome(cliente.getNome());
-            }
-
-            if (cliente.getEndereco() != clienteEditar.getEndereco()) {
-                clienteEditar.setEndereco(cliente.getEndereco());
-            }
-            if (cliente.getTelefone() != clienteEditar.getTelefone()) {
-                clienteEditar.setTelefone(cliente.getTelefone());
-            }
-        }
-        return clienteEditar;
-    }
-
 }
-
-

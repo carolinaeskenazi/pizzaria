@@ -1,23 +1,33 @@
 package pizzaria8.classes.grupo.pizzaria.Clientes;
 
-import pizzaria8.classes.grupo.pizzaria.Pedidos.Pedido;
+import jakarta.persistence.*;
 
-import java.util.ArrayList;
-
+@Entity
 public class Cliente {
 
-    private String nome;
-    private String telefone;
-    private String endereco;
-    private String cpf;
-    private ArrayList<Pedido> pedidos;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    public Cliente(String nome, String telefone, String endereco,String cpf) {
+    @Column(unique = true, nullable = false)
+    private String cpf;
+
+    @Column(nullable = false)
+    private String nome;
+
+    @Column(nullable = false)
+    private String telefone;
+
+    @Column(nullable = false)
+    private String endereco;
+
+    public Cliente() {}
+
+    public Cliente(String cpf, String nome, String telefone, String endereco) {
+        this.cpf = cpf;
         this.nome = nome;
         this.telefone = telefone;
         this.endereco = endereco;
-        this.cpf = cpf;
-        this.pedidos = new ArrayList<>();
     }
 
     public String getNome() {
@@ -52,14 +62,14 @@ public class Cliente {
         this.cpf = cpf;
     }
 
-    public void listarPedidos() {
-        if (pedidos.isEmpty()) {
-            System.out.println("Cliente " + nome + " não tem pedidos.");
-        } else {
-            System.out.println("Pedidos do cliente " + nome + ":");
-            for (Pedido p : pedidos) {
-                System.out.println("Pedido #" + p.getId());
-            }
-        }
-    }
+//    public void listarPedidos() {
+//        if (pedidos.isEmpty()) {
+//            System.out.println("Cliente " + nome + " não tem pedidos.");
+//        } else {
+//            System.out.println("Pedidos do cliente " + nome + ":");
+//            for (Pedido p : pedidos) {
+//                System.out.println("Pedido #" + p.getId());
+//            }
+//        }
+//    }
 }
