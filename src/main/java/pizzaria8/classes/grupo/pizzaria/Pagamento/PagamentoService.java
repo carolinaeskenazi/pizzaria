@@ -1,50 +1,28 @@
 package pizzaria8.classes.grupo.pizzaria.Pagamento;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
 
 @Service
 public class PagamentoService {
 
-    // HashMap para simular um "banco de dados" em memória
-    private HashMap<String, Pagamento> pagamentos = new HashMap<>();
+    @Autowired
+    private PagamentoRepository repo;
 
-    // Retorna todos os pagamentos
-    public HashMap<String, Pagamento> getPagamentos() {
-        return pagamentos;
+    /** Salva (ou atualiza) um pagamento */
+    public Pagamento salvar(Pagamento p) {
+        return repo.save(p);
     }
 
-    // Salva (ou atualiza) um pagamento no HashMap
-    public void salvarPagamento(Pagamento pagamento) {
-        pagamentos.put(pagamento.getId(), pagamento);
+    /** Retorna todos os pagamentos, paginados */
+    public Page<Pagamento> listarTodos(Pageable pageable) {
+        return repo.findAll(pageable);
     }
 
-    // Busca um pagamento específico pelo ID
-    public Pagamento getPagamento(String id) {
-        return pagamentos.get(id);
-    }
-
-    // Remove um pagamento do HashMap
-    public Pagamento removerPagamento(String id) {
-        return pagamentos.remove(id);
-    }
-
-    // Edita um pagamento existente
-    public Pagamento editarPagamento(String id, Pagamento pagamento) {
-        Pagamento pagamentoEditar = getPagamento(id);
-        if (pagamentoEditar != null) {
-            // Se foi enviado um novo ID, atualiza
-            if (pagamento.getId() != null) {
-                pagamentoEditar.setId(pagamento.getId());
-            }
-            // Atualiza valor, se diferente de 0
-            if (pagamento.getValor() != 0) {
-                pagamentoEditar.setValor(pagamento.getValor());
-            }
-            // Atualiza status de pago
-            pagamentoEditar.setPago(pagamento.isPago());
-        }
-        return pagamentoEditar;
+    /** Retorna só os pagamentos com pago == parâmetro, paginados */
+    public Page<Pagamento> filtrarPorPago(boolean pago, Pageable pageable) {
+        return repo.findByPago(pago, pageable);
     }
 }
