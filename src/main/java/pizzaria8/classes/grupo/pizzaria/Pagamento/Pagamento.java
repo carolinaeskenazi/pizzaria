@@ -1,14 +1,21 @@
 package pizzaria8.classes.grupo.pizzaria.Pagamento;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "pagamento")
 public class Pagamento {
 
-    // ID para identificar cada pagamento no HashMap
+    @Id
     private String id;
+
+    @Column(nullable = false)
     private double valor;
+
+    @Column(nullable = false)
     private boolean pago;
 
-    public Pagamento() {
-    }
+    public Pagamento() {}
 
     public Pagamento(String id, double valor, boolean pago) {
         this.id = id;
@@ -16,6 +23,7 @@ public class Pagamento {
         this.pago = pago;
     }
 
+    // Getters e Setters
     public String getId() {
         return id;
     }
@@ -43,7 +51,7 @@ public class Pagamento {
     public String realizarPagamento(double valorPizza, double dinheiro) {
         if (dinheiro >= valorPizza) {
             double troco = dinheiro - valorPizza;
-            this.setPago(true); // Marca como pago
+            this.setPago(true);
             return "O seu troco foi de " + troco;
         } else {
             this.setPago(false);
