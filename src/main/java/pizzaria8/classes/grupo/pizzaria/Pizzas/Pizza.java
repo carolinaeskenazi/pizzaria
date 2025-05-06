@@ -13,8 +13,7 @@ public class Pizza {
     private String sabor;
     private double preco;
 
-    @ElementCollection
-    private List<String> ingredientes;
+    private String ingredientes;
 
     public Pizza() {
     }
@@ -36,11 +35,11 @@ public class Pizza {
         this.sabor = sabor;
     }
 
-    public List<String> getIngredientes() {
+    public String getIngredientes() {
         return ingredientes;
     }
 
-    public void setIngredientes(List<String> ingredientes) {
+    public void setIngredientes(String ingredientes) {
         this.ingredientes = ingredientes;
     }
 
